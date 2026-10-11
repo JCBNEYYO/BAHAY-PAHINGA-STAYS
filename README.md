@@ -34,5 +34,5 @@ Optional: set a `SECRET_KEY` environment variable for production.
 ## AI tools used
 - Claude AI to help me organize the codes and some errors that are found
 
-## Idea claim (post in class chat)
+## Idea claim 
 **Bahay Pahinga Stays: online reservations for a small Airbnb host: Reservations**
