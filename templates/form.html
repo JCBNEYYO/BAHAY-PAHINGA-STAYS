@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block content %}
+<h1>{{ title }}</h1>
+<form method="post" class="card" style="max-width:480px">
+<label>Room<select name="room_id" required>{% for room in rooms %}
+<option value="{{ room.id }}" {{ 'selected' if r.room_id|string == room.id|string }}>{{ room.name }} (₱{{ room.price }}/night, max {{ room.capacity }})</option>{% endfor %}</select></label>
+<label>Check-in<input type="date" name="check_in" value="{{ r.check_in }}" required></label>
+<label>Check-out<input type="date" name="check_out" value="{{ r.check_out }}" required></label>
+<label>Guests<input type="number" name="guests" min="1" value="{{ r.guests or 1 }}" required></label>
+<label>Notes (optional)<textarea name="notes" maxlength="300">{{ r.notes or '' }}</textarea></label>
+<button class="btn">Save</button> <a class="btn gray" href="{{ url_for('reservations') }}">Cancel</a></form>
+{% endblock %}

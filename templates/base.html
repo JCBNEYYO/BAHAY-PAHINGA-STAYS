@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bahay Pahinga Stays</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+<nav><a class="brand" href="{{ url_for('index') }}">🏡 Bahay Pahinga Stays</a>
+<div>{% if g.user %}<a href="{{ url_for('reservations') }}">{{ 'All bookings' if g.user.role == 'admin' else 'My bookings' }}</a>
+<a href="{{ url_for('logout') }}">Logout ({{ g.user.name }})</a>
+{% else %}<a href="{{ url_for('login') }}">Login</a><a href="{{ url_for('register') }}">Register</a>{% endif %}</div></nav>
+<main>
+{% for cat, msg in get_flashed_messages(with_categories=true) %}<div class="flash {{ cat }}">{{ msg }}</div>{% endfor %}
+{% block content %}{% endblock %}
+</main></body></html>

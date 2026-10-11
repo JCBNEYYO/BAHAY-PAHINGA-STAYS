@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block content %}
+<h1>{{ 'All reservations' if g.user.role == 'admin' else 'My reservations' }}</h1>
+<p><a class="btn" href="{{ url_for('create') }}">+ New reservation</a></p>
+<div class="table-wrap"><table>
+<tr>{% if g.user.role == 'admin' %}<th>Guest</th>{% endif %}<th>Room</th><th>Check-in</th><th>Check-out</th><th>Nights</th><th>Guests</th><th>Total</th><th></th></tr>
+{% for r, nights, total in items %}<tr>
+{% if g.user.role == 'admin' %}<td>{{ r.guest }}</td>{% endif %}
+<td>{{ r.room }}</td><td>{{ r.check_in }}</td><td>{{ r.check_out }}</td><td>{{ nights }}</td><td>{{ r.guests }}</td><td>₱{{ '{:,}'.format(total) }}</td>
+<td><a class="btn gray" href="{{ url_for('edit', rid=r.id) }}">Edit</a>
+<form class="inline" method="post" action="{{ url_for('delete', rid=r.id) }}" onsubmit="return confirm('Delete this reservation?')"><button class="btn red">Delete</button></form></td></tr>
+{% else %}<tr><td colspan="8">No reservations yet.</td></tr>{% endfor %}
+</table></div>
+{% endblock %}

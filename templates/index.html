@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block content %}
+<img class="hero" src="{{ url_for('static', filename='hero.svg') }}" alt="Illustration of our Airbnb house">
+<h1>Bahay Pahinga Stays</h1>
+<p>A family-run Airbnb with three homey units. Pick your dates, reserve online, and we'll have the keys ready. No more back-and-forth messages to check availability.</p>
+<p><a class="btn" href="{{ url_for('create') if g.user else url_for('register') }}">Book Now</a></p>
+<h2>Our rooms</h2>
+<div class="grid">{% for room in rooms %}<div class="card"><h3>{{ room.name }}</h3>
+<p>{{ room.description }}</p><p><b>₱{{ '{:,}'.format(room.price) }}</b> / night · up to {{ room.capacity }} guests</p></div>{% endfor %}</div>
+{% endblock %}
